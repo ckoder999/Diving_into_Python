@@ -21,3 +21,9 @@ mul1 = get_multiplier_num(3)
 print(mul1(15))
 
 #map
+def squarify(a):
+    return a*a
+
+print(list(map(squarify, range(5))))
+
+print(map(squarify, range(5)))
