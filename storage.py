@@ -8,25 +8,36 @@ parser.add_argument("--key", action="store")
 parser.add_argument("--value", action="store")
 
 args = parser.parse_args()
-
-key_value = dict()
+#key = args.key
+#value = args.value
+my_dict = dict()
+my_dict[args.key] = args.value
 
 storage_path = os.path.join(tempfile.gettempdir(), 'storage.data')
 
 if args.value:
-    key_value[args.key] = args.value
-#print(key_value)
 
-
-#if not(value):
 #пишем json
+
     with open(storage_path, 'a') as write_file:
-        json.dump(key_value, write_file)
+        json.dump(my_dict, write_file)
+        write_file.write("\n")
+
 else:
 #читаем json
 #You should pass the file contents (i.e. a string) to json.loads(), not the file object itself
-    with open(storage_path) as read_file:
-        data = json.loads(read_file.read())
+    with open(storage_path, 'r') as read_file:
+        for line in read_file:
+        #line = read_file.readline()
+            data = json.loads(line)
+            i = False
+            if args.key in data.keys():
+                print(data[args.key])
+                I = True
+    if not i:
+        print(" ")
+
+
 
 
 #print(data)
@@ -34,12 +45,9 @@ else:
     #data1 =   json.JSONDecoder().decode({"key": "value"})
 
 
-#else:
-#    print("Adding new entry")
 
-#with open(storage_path, 'a') as f:
-#    json.dumps(key_value, f)
-    #json.dumps(value, f)
+
+
 
 """
 key_value = dict
