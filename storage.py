@@ -27,15 +27,18 @@ else:
 #читаем json
 #You should pass the file contents (i.e. a string) to json.loads(), not the file object itself
     with open(storage_path, 'r') as read_file:
+        my_list = list()
         for line in read_file:
-        #line = read_file.readline()
+            #line = read_file.readline()
             data = json.loads(line)
-            i = False
             if args.key in data.keys():
-                print(data[args.key])
-                I = True
-    if not i:
+                my_list.append(data[args.key])
+
+    if not my_list:
         print(" ")
+    else:
+        #for p in my_list:
+        print(*my_list, sep=', ')
 
 
 
