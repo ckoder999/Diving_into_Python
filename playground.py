@@ -1,25 +1,22 @@
-import requests
-import pprint
-#from dateutil.parser import parse
-import datetime
+import json
 
-class YahooWeatherForecast():
-    def __init__(self, city):
-        self.city = city
+def to_json(dict):
+    return json.dumps(dict)
 
-    def get(self):
-        url = f"http://api.openweathermap.org/data/2.5/forecast?q={self.city},ru&units=metric&lang=ru&APPID=334739ed0b81c466c0cfabc4db98e5cb"
-        data = requests.get(url).json()
-        forecast_data = data["list"] #dt_txt  - date time is given
-        forecast = []
-        for day_data in forecast_data:
-            forecast.append({
-                "date": datetime.datetime.fromtimestamp(day_data["dt"]).strftime('%Y-%m-%d %H:%M:%S'),
-                "high_temp": day_data["main"]["temp_max"]
-            })
-        print(forecast)
+def from_json(dict):
+    my_str = json.loads(dict)
+    return my_str
 
 
-ywp = YahooWeatherForecast("Moscow")
+my_dict = dict()
 
-ywp.get()
+my_dict = {"abf":1, "SDgs":2342, "3g35g":2342}
+
+
+print(to_json(my_dict))
+
+print(from_json(my_dict))
+
+
+
+
